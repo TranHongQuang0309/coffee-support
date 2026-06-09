@@ -47,6 +47,7 @@ class User extends Authenticatable
         ];
     }
 
+
     public function coffeeFarms()
     {
         return $this->hasMany(CoffeeFarm::class);
