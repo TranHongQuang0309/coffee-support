@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\TechnicalArticle;
+
 class TechnicalCategory extends Model
 {
-    //
-     protected $fillable = [
+    protected $fillable = [
         'name',
         'slug',
         'description',
