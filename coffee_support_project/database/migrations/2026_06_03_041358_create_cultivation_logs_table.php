@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('cultivation_logs', function (Blueprint $table) {
+            $table->id();
+
+        $table->foreignId('user_id')
+              ->constrained('users')
+              ->cascadeOnDelete();
+
+        $table->foreignId('coffee_farm_id')
+              ->constrained('coffee_farms')
+              ->cascadeOnDelete();
+
+        $table->date('log_date');
+
+        $table->enum('activity_type', [
+            'watering',
+            'fertilizing',
+            'spraying',
+            'pruning',
+            'weeding',
+            'harvesting',
+            'pest_checking',
+            'other'
+        ]);
+
+        $table->string('title', 150);
+
+        $table->text('description')->nullable();
+
+        $table->decimal('cost', 12, 2)->nullable();
+
+        $table->string('image_url', 255)->nullable();
+
+        $table->enum('status', [
+            'planned',
+            'completed',
+            'cancelled'
+        ])->default('completed');
+
+        $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('cultivation_logs');
+    }
+};
