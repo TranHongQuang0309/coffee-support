@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+use App\Models\User;
+use App\Models\CoffeeFarm;
 use App\Models\Answer;
+
 class Question extends Model
 {
-    //
     protected $fillable = [
         'user_id',
         'coffee_farm_id',
@@ -16,6 +19,13 @@ class Question extends Model
         'status',
         'view_count',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'view_count' => 'integer',
+        ];
+    }
 
     public function user()
     {
