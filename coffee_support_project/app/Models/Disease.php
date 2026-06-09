@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+use App\Models\User;
 use App\Models\DiagnosisRequest;
 
 class Disease extends Model
 {
-    //
     protected $fillable = [
         'created_by',
         'name',
@@ -29,6 +30,6 @@ class Disease extends Model
 
     public function diagnosisRequests()
     {
-    return $this->hasMany(DiagnosisRequest::class, 'predicted_disease_id');
+        return $this->hasMany(DiagnosisRequest::class, 'predicted_disease_id');
     }
 }
