@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -17,29 +14,43 @@ use App\Models\Disease;
 use App\Models\DiagnosisRequest;
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\MarketPrice;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    protected $fillable = [
+        'full_name',
+        'email',
+        'phone',
+        'password',
+        'role',
+        'status',
+        'avatar_url',
+        'province',
+        'district',
+        'address',
+        'last_login_at',
+    ];
+
+    protected $hidden = [
+        'password',
+       
+    ];
+
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
         ];
     }
+
     public function coffeeFarms()
     {
-    return $this->hasMany(CoffeeFarm::class);
+        return $this->hasMany(CoffeeFarm::class);
     }
 
     public function cultivationLogs()
@@ -54,27 +65,31 @@ class User extends Authenticatable
 
     public function diseases()
     {
-    return $this->hasMany(Disease::class, 'created_by');
+        return $this->hasMany(Disease::class, 'created_by');
     }
 
     public function diagnosisRequests()
     {
-    return $this->hasMany(DiagnosisRequest::class);
+        return $this->hasMany(DiagnosisRequest::class);
     }
 
     public function diagnosedRequests()
     {
-    return $this->hasMany(DiagnosisRequest::class, 'diagnosed_by');
+        return $this->hasMany(DiagnosisRequest::class, 'diagnosed_by');
     }
 
     public function questions()
     {
-    return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class);
     }
 
     public function answers()
     {
-    return $this->hasMany(Answer::class);  
+        return $this->hasMany(Answer::class);
     }
 
+    public function marketPrices()
+    {
+        return $this->hasMany(MarketPrice::class, 'created_by');
+    }
 }
