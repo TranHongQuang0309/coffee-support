@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+use App\Models\CoffeeFarm;
+use App\Models\Disease;
+
 class DiagnosisRequest extends Model
 {
-    //
-        protected $fillable = [
+    protected $fillable = [
         'user_id',
         'coffee_farm_id',
         'predicted_disease_id',
@@ -20,6 +23,14 @@ class DiagnosisRequest extends Model
         'status',
         'diagnosed_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'confidence_score' => 'decimal:2',
+            'diagnosed_at' => 'datetime',
+        ];
+    }
 
     public function user()
     {
@@ -40,5 +51,4 @@ class DiagnosisRequest extends Model
     {
         return $this->belongsTo(User::class, 'diagnosed_by');
     }
-
 }
