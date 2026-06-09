@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+use App\Models\Question;
+
 class Answer extends Model
 {
-    //
     protected $fillable = [
         'question_id',
         'user_id',
@@ -15,6 +17,13 @@ class Answer extends Model
         'status',
         'is_accepted',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_accepted' => 'boolean',
+        ];
+    }
 
     public function question()
     {
