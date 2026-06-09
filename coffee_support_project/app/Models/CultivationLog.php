@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\User;
+use App\Models\CoffeeFarm;
+
 class CultivationLog extends Model
 {
-    //
     protected $fillable = [
         'user_id',
         'coffee_farm_id',
@@ -18,6 +20,14 @@ class CultivationLog extends Model
         'image_url',
         'status',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'log_date' => 'date',
+            'cost' => 'decimal:2',
+        ];
+    }
 
     public function user()
     {
