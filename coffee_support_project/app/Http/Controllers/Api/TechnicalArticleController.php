@@ -14,24 +14,49 @@ class TechnicalArticleController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $query = TechnicalArticle::with(['category', 'creator'])
+        $validated = $request->validate([
+            'technical_category_id' => ['nullable', 'integer', 'exists:technical_categories,id'],
+            'status' => ['nullable', Rule::in(['draft', 'published', 'hidden'])],
+            'keyword' => ['nullable', 'string', 'max:255'],
+            'source_type' => [
+                'nullable',
+                Rule::in([
+                    'self_written',
+                    'external',
+                    'summarized',
+                    'expert_contributed',
+                ]),
+            ],
+            'is_verified' => ['nullable', 'boolean'],
+        ]);
+
+        $query = TechnicalArticle::with(['category', 'creator', 'verifier'])
             ->latest();
 
-        if ($request->filled('technical_category_id')) {
-            $query->where('technical_category_id', $request->technical_category_id);
+        if (!empty($validated['technical_category_id'])) {
+            $query->where('technical_category_id', $validated['technical_category_id']);
         }
 
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
+        if (!empty($validated['status'])) {
+            $query->where('status', $validated['status']);
         }
 
-        if ($request->filled('keyword')) {
-            $keyword = $request->keyword;
+        if (!empty($validated['source_type'])) {
+            $query->where('source_type', $validated['source_type']);
+        }
+
+        if (array_key_exists('is_verified', $validated)) {
+            $query->where('is_verified', $validated['is_verified']);
+        }
+
+        if (!empty($validated['keyword'])) {
+            $keyword = $validated['keyword'];
 
             $query->where(function ($q) use ($keyword) {
                 $q->where('title', 'like', "%{$keyword}%")
                     ->orWhere('summary', 'like', "%{$keyword}%")
-                    ->orWhere('content', 'like', "%{$keyword}%");
+                    ->orWhere('content', 'like', "%{$keyword}%")
+                    ->orWhere('source_name', 'like', "%{$keyword}%");
             });
         }
 
@@ -90,6 +115,30 @@ class TechnicalArticleController extends Controller
                 'nullable',
                 'date',
             ],
+
+            'source_type' => [
+                'nullable',
+                Rule::in([
+                    'self_written',
+                    'external',
+                    'summarized',
+                    'expert_contributed',
+                ]),
+            ],
+            'source_name' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'source_url' => [
+                'nullable',
+                'url',
+                'max:500',
+            ],
+            'is_verified' => [
+                'nullable',
+                'boolean',
+            ],
         ]);
 
         $category = TechnicalCategory::find($validated['technical_category_id']);
@@ -98,7 +147,23 @@ class TechnicalArticleController extends Controller
             return $this->notFoundResponse('Không tìm thấy danh mục kỹ thuật.');
         }
 
+        $sourceType = $validated['source_type'] ?? 'self_written';
+
+        if (in_array($sourceType, ['external', 'summarized'], true) && empty($validated['source_name'])) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vui lòng nhập tên nguồn tham khảo cho bài viết lấy từ nguồn ngoài hoặc tổng hợp từ nhiều nguồn.',
+                'errors' => [
+                    'source_name' => [
+                        'Vui lòng nhập tên nguồn tham khảo.',
+                    ],
+                ],
+            ], 422);
+        }
+
+        $status = $validated['status'] ?? 'draft';
         $slug = $validated['slug'] ?? Str::slug($validated['title']);
+        $isVerified = $validated['is_verified'] ?? false;
 
         $article = TechnicalArticle::create([
             'technical_category_id' => $validated['technical_category_id'],
@@ -108,12 +173,21 @@ class TechnicalArticleController extends Controller
             'summary' => $validated['summary'] ?? null,
             'content' => $validated['content'],
             'thumbnail_url' => $validated['thumbnail_url'] ?? null,
-            'status' => $validated['status'] ?? 'draft',
+            'status' => $status,
             'view_count' => 0,
-            'published_at' => $validated['published_at'] ?? null,
+            'published_at' => $status === 'published'
+                ? ($validated['published_at'] ?? now())
+                : ($validated['published_at'] ?? null),
+
+            'source_type' => $sourceType,
+            'source_name' => $validated['source_name'] ?? null,
+            'source_url' => $validated['source_url'] ?? null,
+            'is_verified' => $isVerified,
+            'verified_by' => $isVerified ? $request->user()->id : null,
+            'verified_at' => $isVerified ? now() : null,
         ]);
 
-        $article->load(['category', 'creator']);
+        $article->load(['category', 'creator', 'verifier']);
 
         return response()->json([
             'success' => true,
@@ -124,7 +198,7 @@ class TechnicalArticleController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        $article = TechnicalArticle::with(['category', 'creator'])->find($id);
+        $article = TechnicalArticle::with(['category', 'creator', 'verifier'])->find($id);
 
         if (!$article) {
             return $this->notFoundResponse('Không tìm thấy bài viết kỹ thuật.');
@@ -135,7 +209,7 @@ class TechnicalArticleController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Lấy chi tiết bài viết kỹ thuật thành công.',
-            'data' => $article->fresh(['category', 'creator']),
+            'data' => $article->fresh(['category', 'creator', 'verifier']),
         ]);
     }
 
@@ -199,14 +273,74 @@ class TechnicalArticleController extends Controller
                 'nullable',
                 'date',
             ],
+
+            'source_type' => [
+                'sometimes',
+                'required',
+                Rule::in([
+                    'self_written',
+                    'external',
+                    'summarized',
+                    'expert_contributed',
+                ]),
+            ],
+            'source_name' => [
+                'sometimes',
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'source_url' => [
+                'sometimes',
+                'nullable',
+                'url',
+                'max:500',
+            ],
+            'is_verified' => [
+                'sometimes',
+                'required',
+                'boolean',
+            ],
         ]);
+
+        $sourceType = $validated['source_type'] ?? $article->source_type;
+
+        if (in_array($sourceType, ['external', 'summarized'], true)) {
+            $sourceName = $validated['source_name'] ?? $article->source_name;
+
+            if (empty($sourceName)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Vui lòng nhập tên nguồn tham khảo cho bài viết lấy từ nguồn ngoài hoặc tổng hợp từ nhiều nguồn.',
+                    'errors' => [
+                        'source_name' => [
+                            'Vui lòng nhập tên nguồn tham khảo.',
+                        ],
+                    ],
+                ], 422);
+            }
+        }
 
         if (isset($validated['title']) && empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
         }
 
-        if (($validated['status'] ?? null) === 'published' && empty($validated['published_at'])) {
+        if (
+            ($validated['status'] ?? null) === 'published'
+            && empty($validated['published_at'])
+            && !$article->published_at
+        ) {
             $validated['published_at'] = now();
+        }
+
+        if (array_key_exists('is_verified', $validated)) {
+            if ($validated['is_verified']) {
+                $validated['verified_by'] = $request->user()->id;
+                $validated['verified_at'] = now();
+            } else {
+                $validated['verified_by'] = null;
+                $validated['verified_at'] = null;
+            }
         }
 
         $article->update($validated);
@@ -214,7 +348,7 @@ class TechnicalArticleController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Cập nhật bài viết kỹ thuật thành công.',
-            'data' => $article->fresh(['category', 'creator']),
+            'data' => $article->fresh(['category', 'creator', 'verifier']),
         ]);
     }
 
