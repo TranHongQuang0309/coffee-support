@@ -20,6 +20,13 @@ class TechnicalArticle extends Model
         'status',
         'view_count',
         'published_at',
+
+        'source_type',
+        'source_name',
+        'source_url',
+        'is_verified',
+        'verified_by',
+        'verified_at',
     ];
 
     protected function casts(): array
@@ -27,6 +34,8 @@ class TechnicalArticle extends Model
         return [
             'view_count' => 'integer',
             'published_at' => 'datetime',
+            'is_verified' => 'boolean',
+            'verified_at' => 'datetime',
         ];
     }
 
@@ -39,4 +48,9 @@ class TechnicalArticle extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function verifier()
+    {
+    return $this->belongsTo(User::class, 'verified_by');
+    }   
 }
