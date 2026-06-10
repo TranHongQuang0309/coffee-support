@@ -1,0 +1,3870 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Coffee Cultivation Support API",
+        "description": "Tài liệu API cho hệ thống website hỗ trợ kỹ thuật nông nghiệp và canh tác cây cà phê khu vực Tây Nguyên.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/api/admin/dashboard/statistics": {
+            "get": {
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Lấy thống kê tổng quan hệ thống",
+                "description": "Admin xem thống kê tổng quan toàn hệ thống: người dùng, vườn cà phê, nhật ký canh tác, bài viết kỹ thuật, sâu bệnh, chẩn đoán, hỏi đáp, giá thị trường và dữ liệu thời tiết cache.",
+                "operationId": "787f8f76c3edef0f1295ccb6ccd76945",
+                "responses": {
+                    "200": {
+                        "description": "Lấy thống kê hệ thống thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Lấy thống kê hệ thống thành công."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "users": {
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "example": 20
+                                                        },
+                                                        "farmers": {
+                                                            "type": "integer",
+                                                            "example": 15
+                                                        },
+                                                        "experts": {
+                                                            "type": "integer",
+                                                            "example": 3
+                                                        },
+                                                        "admins": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "active": {
+                                                            "type": "integer",
+                                                            "example": 18
+                                                        },
+                                                        "locked": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "inactive": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "farms": {
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "cultivation": {
+                                                    "properties": {
+                                                        "logs": {
+                                                            "type": "integer",
+                                                            "example": 35
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "content": {
+                                                    "properties": {
+                                                        "technical_categories": {
+                                                            "type": "integer",
+                                                            "example": 6
+                                                        },
+                                                        "technical_articles": {
+                                                            "properties": {
+                                                                "total": {
+                                                                    "type": "integer",
+                                                                    "example": 25
+                                                                },
+                                                                "draft": {
+                                                                    "type": "integer",
+                                                                    "example": 4
+                                                                },
+                                                                "published": {
+                                                                    "type": "integer",
+                                                                    "example": 19
+                                                                },
+                                                                "hidden": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "verified": {
+                                                                    "type": "integer",
+                                                                    "example": 16
+                                                                },
+                                                                "not_verified": {
+                                                                    "type": "integer",
+                                                                    "example": 9
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "diseases": {
+                                                            "properties": {
+                                                                "total": {
+                                                                    "type": "integer",
+                                                                    "example": 10
+                                                                },
+                                                                "active": {
+                                                                    "type": "integer",
+                                                                    "example": 9
+                                                                },
+                                                                "inactive": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                },
+                                                                "disease": {
+                                                                    "type": "integer",
+                                                                    "example": 5
+                                                                },
+                                                                "pest": {
+                                                                    "type": "integer",
+                                                                    "example": 3
+                                                                },
+                                                                "nutrient_deficiency": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "other": {
+                                                                    "type": "integer",
+                                                                    "example": 0
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "diagnosis": {
+                                                    "properties": {
+                                                        "total": {
+                                                            "type": "integer",
+                                                            "example": 18
+                                                        },
+                                                        "pending": {
+                                                            "type": "integer",
+                                                            "example": 5
+                                                        },
+                                                        "diagnosed": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "rejected": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "qa": {
+                                                    "properties": {
+                                                        "questions": {
+                                                            "properties": {
+                                                                "total": {
+                                                                    "type": "integer",
+                                                                    "example": 14
+                                                                },
+                                                                "pending": {
+                                                                    "type": "integer",
+                                                                    "example": 3
+                                                                },
+                                                                "answered": {
+                                                                    "type": "integer",
+                                                                    "example": 10
+                                                                },
+                                                                "closed": {
+                                                                    "type": "integer",
+                                                                    "example": 1
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "answers": {
+                                                            "properties": {
+                                                                "total": {
+                                                                    "type": "integer",
+                                                                    "example": 21
+                                                                },
+                                                                "visible": {
+                                                                    "type": "integer",
+                                                                    "example": 19
+                                                                },
+                                                                "hidden": {
+                                                                    "type": "integer",
+                                                                    "example": 2
+                                                                },
+                                                                "accepted": {
+                                                                    "type": "integer",
+                                                                    "example": 8
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "market": {
+                                                    "properties": {
+                                                        "prices": {
+                                                            "type": "integer",
+                                                            "example": 30
+                                                        },
+                                                        "active": {
+                                                            "type": "integer",
+                                                            "example": 28
+                                                        },
+                                                        "inactive": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "domestic": {
+                                                            "type": "integer",
+                                                            "example": 24
+                                                        },
+                                                        "world": {
+                                                            "type": "integer",
+                                                            "example": 6
+                                                        },
+                                                        "manual": {
+                                                            "type": "integer",
+                                                            "example": 30
+                                                        },
+                                                        "api": {
+                                                            "type": "integer",
+                                                            "example": 0
+                                                        },
+                                                        "sheet": {
+                                                            "type": "integer",
+                                                            "example": 0
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "weather": {
+                                                    "properties": {
+                                                        "cached_records": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "cached_today": {
+                                                            "type": "integer",
+                                                            "example": 3
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được xem thống kê hệ thống"
+                    },
+                    "500": {
+                        "description": "Lỗi hệ thống khi lấy thống kê"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/questions/{question}/answers": {
+            "get": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Lấy danh sách câu trả lời của câu hỏi",
+                "description": "Lấy danh sách câu trả lời thuộc một câu hỏi kỹ thuật. Farmer xem câu trả lời của câu hỏi mình được phép xem. Expert/Admin xem theo quyền hệ thống.",
+                "operationId": "c47bd150dab10764fa58f217fe2abe98",
+                "parameters": [
+                    {
+                        "name": "question",
+                        "in": "path",
+                        "description": "ID câu hỏi kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Lọc theo trạng thái câu trả lời",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "visible",
+                                "hidden"
+                            ]
+                        },
+                        "example": "visible"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xem câu trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu hỏi kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Tạo câu trả lời cho câu hỏi",
+                "description": "Expert/Admin tạo câu trả lời cho một câu hỏi kỹ thuật. Khi có câu trả lời, câu hỏi có thể được chuyển sang trạng thái answered.",
+                "operationId": "5f48c9a647ed075bdad9f8b47837239c",
+                "parameters": [
+                    {
+                        "name": "question",
+                        "in": "path",
+                        "description": "ID câu hỏi kỹ thuật cần trả lời",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "content"
+                                ],
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Dựa trên mô tả, cây cà phê có thể đang bị ảnh hưởng bởi nấm sau mưa kéo dài. Anh/chị nên tỉa cành tạo thông thoáng, kiểm tra mặt dưới lá và áp dụng biện pháp phòng trừ phù hợp."
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "answers/huong-dan-xu-ly-vang-la.jpg",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "visible",
+                                        "enum": [
+                                            "visible",
+                                            "hidden"
+                                        ]
+                                    },
+                                    "is_accepted": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ chuyên gia hoặc quản trị viên mới được trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu hỏi kỹ thuật"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/answers/{answer}": {
+            "get": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Lấy chi tiết câu trả lời",
+                "description": "Lấy chi tiết một câu trả lời theo ID.",
+                "operationId": "013ed6e8f1c4f84b6a85ed008a5ada4d",
+                "parameters": [
+                    {
+                        "name": "answer",
+                        "in": "path",
+                        "description": "ID câu trả lời",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xem câu trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu trả lời"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Cập nhật câu trả lời",
+                "description": "Expert có thể cập nhật câu trả lời của mình. Admin có thể cập nhật tất cả câu trả lời, bao gồm trạng thái và đánh dấu câu trả lời được chấp nhận.",
+                "operationId": "b5df0f2e949d4b7e7680bf64de6dee2f",
+                "parameters": [
+                    {
+                        "name": "answer",
+                        "in": "path",
+                        "description": "ID câu trả lời",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Cập nhật nội dung tư vấn: cần kiểm tra thêm độ ẩm đất, tình trạng rễ và mức độ lan rộng của triệu chứng trước khi xử lý."
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "answers/cap-nhat-huong-dan.jpg",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "visible",
+                                        "enum": [
+                                            "visible",
+                                            "hidden"
+                                        ]
+                                    },
+                                    "is_accepted": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền cập nhật câu trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu trả lời"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Xóa câu trả lời",
+                "description": "Expert có thể xóa câu trả lời của mình. Admin có thể xóa tất cả câu trả lời. Nếu xóa câu trả lời cuối cùng, câu hỏi có thể quay về trạng thái pending.",
+                "operationId": "49d473d6f1cd46db23eb9fa2f9c0bcec",
+                "parameters": [
+                    {
+                        "name": "answer",
+                        "in": "path",
+                        "description": "ID câu trả lời",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xóa câu trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu trả lời"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Answers"
+                ],
+                "summary": "Cập nhật một phần câu trả lời",
+                "description": "Cập nhật một phần thông tin câu trả lời, ví dụ chỉ cập nhật trạng thái hoặc đánh dấu câu trả lời được chấp nhận.",
+                "operationId": "a6adbe2a510a4f52d7f9b201c63d1e8f",
+                "parameters": [
+                    {
+                        "name": "answer",
+                        "in": "path",
+                        "description": "ID câu trả lời",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Nội dung cập nhật ngắn."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "hidden",
+                                        "enum": [
+                                            "visible",
+                                            "hidden"
+                                        ]
+                                    },
+                                    "is_accepted": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật một phần câu trả lời thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền cập nhật câu trả lời"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu trả lời"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Đăng nhập",
+                "description": "Đăng nhập bằng email và password, trả về access token Sanctum.",
+                "operationId": "49b9c0b0937dc90253b1d101b540ac43",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@coffee-support.test"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Đăng nhập thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Đăng nhập thành công."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "1|abcxyz..."
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "full_name": {
+                                                            "type": "string",
+                                                            "example": "Admin User"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "admin@coffee-support.test"
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    },
+                    "401": {
+                        "description": "Sai email hoặc mật khẩu"
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Đăng ký tài khoản farmer",
+                "description": "Tạo tài khoản người trồng cà phê. Mặc định role là farmer.",
+                "operationId": "ec697f64800b4dc34b607ddba98a90cf",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "full_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string",
+                                        "example": "Nguyễn Văn A"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "farmer01@example.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "0901234567"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    },
+                                    "province": {
+                                        "type": "string",
+                                        "example": "Đắk Lắk"
+                                    },
+                                    "district": {
+                                        "type": "string",
+                                        "example": "Cư Mgar"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Xã Ea Tul"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Đăng ký thành công"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                }
+            }
+        },
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Lấy thông tin người dùng hiện tại",
+                "description": "Trả về thông tin user đang đăng nhập.",
+                "operationId": "be327c2e2b0c9a837d8b1da2885aa33e",
+                "responses": {
+                    "200": {
+                        "description": "Lấy thông tin người dùng thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Đăng xuất",
+                "description": "Xóa token hiện tại của người dùng.",
+                "operationId": "2ff44a77f20a142336910f141e14e6fe",
+                "responses": {
+                    "200": {
+                        "description": "Đăng xuất thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/coffee-farms": {
+            "get": {
+                "tags": [
+                    "Coffee Farms"
+                ],
+                "summary": "Lấy danh sách vườn cà phê",
+                "description": "Farmer lấy danh sách vườn cà phê của chính mình. Admin/Expert có thể xem theo nghiệp vụ hệ thống.",
+                "operationId": "2ce515254a8d439b99aee240a662dc4b",
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách vườn cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Coffee Farms"
+                ],
+                "summary": "Tạo vườn cà phê",
+                "description": "Farmer tạo mới một vườn cà phê của mình.",
+                "operationId": "dec99fd1750b36bc900019971f84519d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "farm_name"
+                                ],
+                                "properties": {
+                                    "farm_name": {
+                                        "type": "string",
+                                        "example": "Vườn cà phê Ea Tul"
+                                    },
+                                    "province": {
+                                        "type": "string",
+                                        "example": "Đắk Lắk"
+                                    },
+                                    "district": {
+                                        "type": "string",
+                                        "example": "Cư Mgar"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Xã Ea Tul, huyện Cư Mgar"
+                                    },
+                                    "area": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 2.5
+                                    },
+                                    "coffee_variety": {
+                                        "type": "string",
+                                        "example": "Robusta"
+                                    },
+                                    "planting_year": {
+                                        "type": "integer",
+                                        "example": 2020
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 12.6667
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 108.05
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Vườn cà phê trồng giống Robusta."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo vườn cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền tạo vườn cà phê"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/coffee-farms/{id}": {
+            "get": {
+                "tags": [
+                    "Coffee Farms"
+                ],
+                "summary": "Lấy chi tiết vườn cà phê",
+                "description": "Lấy thông tin chi tiết một vườn cà phê theo ID.",
+                "operationId": "20ab6aef413c91824cc25ab8a3b85590",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vườn cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết vườn cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Coffee Farms"
+                ],
+                "summary": "Cập nhật vườn cà phê",
+                "description": "Farmer cập nhật thông tin vườn cà phê của chính mình.",
+                "operationId": "2428f62271a1a4d67774c2cb9d4129b5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vườn cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "farm_name": {
+                                        "type": "string",
+                                        "example": "Vườn cà phê Ea Tul đã cập nhật"
+                                    },
+                                    "province": {
+                                        "type": "string",
+                                        "example": "Đắk Lắk"
+                                    },
+                                    "district": {
+                                        "type": "string",
+                                        "example": "Cư Mgar"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Xã Ea Tul, huyện Cư Mgar"
+                                    },
+                                    "area": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 3
+                                    },
+                                    "coffee_variety": {
+                                        "type": "string",
+                                        "example": "Robusta"
+                                    },
+                                    "planting_year": {
+                                        "type": "integer",
+                                        "example": 2020
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 12.6667
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 108.05
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Cập nhật thông tin vườn."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật vườn cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Coffee Farms"
+                ],
+                "summary": "Xóa vườn cà phê",
+                "description": "Farmer xóa vườn cà phê của chính mình nếu thỏa điều kiện nghiệp vụ.",
+                "operationId": "3d552392f097b03d9050ad47d7183b94",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID vườn cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa vườn cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cultivation-logs": {
+            "get": {
+                "tags": [
+                    "Cultivation Logs"
+                ],
+                "summary": "Lấy danh sách nhật ký canh tác",
+                "description": "Farmer lấy danh sách nhật ký canh tác của chính mình. Có thể lọc theo vườn, loại hoạt động, trạng thái và khoảng ngày.",
+                "operationId": "8169c5232b1df1355023d620f7beb683",
+                "parameters": [
+                    {
+                        "name": "coffee_farm_id",
+                        "in": "query",
+                        "description": "ID vườn cà phê cần lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "activity_type",
+                        "in": "query",
+                        "description": "Loại hoạt động canh tác",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "fertilizing"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Trạng thái nhật ký",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "completed"
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "description": "Ngày bắt đầu lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-01"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "description": "Ngày kết thúc lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách nhật ký canh tác thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cultivation Logs"
+                ],
+                "summary": "Tạo nhật ký canh tác",
+                "description": "Farmer tạo nhật ký canh tác cho một vườn cà phê thuộc quyền sở hữu của mình.",
+                "operationId": "3072eb5b691485d1d561dafe4c4f1a04",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "coffee_farm_id",
+                                    "activity_date",
+                                    "activity_type",
+                                    "title"
+                                ],
+                                "properties": {
+                                    "coffee_farm_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "activity_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-06-10"
+                                    },
+                                    "activity_type": {
+                                        "description": "Ví dụ: watering, fertilizing, pruning, spraying, harvesting, other",
+                                        "type": "string",
+                                        "example": "fertilizing"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Bón phân đợt 1 cho vườn cà phê"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Bón phân NPK cho toàn bộ khu vực vườn sau mưa."
+                                    },
+                                    "materials_used": {
+                                        "type": "string",
+                                        "example": "NPK 16-16-8, phân hữu cơ"
+                                    },
+                                    "cost": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1500000
+                                    },
+                                    "labor_count": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "cultivation-logs/bon-phan-dot-1.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "completed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo nhật ký canh tác thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền tạo nhật ký canh tác"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê hoặc không có quyền truy cập"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/cultivation-logs/{id}": {
+            "get": {
+                "tags": [
+                    "Cultivation Logs"
+                ],
+                "summary": "Lấy chi tiết nhật ký canh tác",
+                "description": "Lấy chi tiết một bản ghi nhật ký canh tác theo ID.",
+                "operationId": "659e8e7ba17a0505a68448e0cb278b65",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID nhật ký canh tác",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết nhật ký canh tác thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy nhật ký canh tác"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cultivation Logs"
+                ],
+                "summary": "Cập nhật nhật ký canh tác",
+                "description": "Farmer cập nhật nhật ký canh tác thuộc vườn của chính mình.",
+                "operationId": "a22a2a32192621db0caa8c6b9c3aa2f3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID nhật ký canh tác",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "coffee_farm_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "activity_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-06-11"
+                                    },
+                                    "activity_type": {
+                                        "type": "string",
+                                        "example": "spraying"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Phun phòng bệnh gỉ sắt"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Phun thuốc phòng bệnh sau giai đoạn mưa kéo dài."
+                                    },
+                                    "materials_used": {
+                                        "type": "string",
+                                        "example": "Thuốc phòng nấm, bình phun"
+                                    },
+                                    "cost": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 800000
+                                    },
+                                    "labor_count": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "cultivation-logs/phun-phong-benh.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "completed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật nhật ký canh tác thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy nhật ký canh tác"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cultivation Logs"
+                ],
+                "summary": "Xóa nhật ký canh tác",
+                "description": "Farmer xóa nhật ký canh tác thuộc quyền sở hữu của mình.",
+                "operationId": "d6800d56fefdf512919065ee03618f30",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID nhật ký canh tác",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa nhật ký canh tác thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy nhật ký canh tác"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/diagnosis-requests": {
+            "get": {
+                "tags": [
+                    "Diagnosis Requests"
+                ],
+                "summary": "Lấy danh sách yêu cầu chẩn đoán",
+                "description": "Farmer xem danh sách yêu cầu chẩn đoán của mình. Expert/Admin có thể xem danh sách yêu cầu để xử lý.",
+                "operationId": "10a8bf597ba9f32bd177e6c2722ce275",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Lọc theo trạng thái yêu cầu chẩn đoán",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pending",
+                                "diagnosed",
+                                "rejected"
+                            ]
+                        },
+                        "example": "pending"
+                    },
+                    {
+                        "name": "coffee_farm_id",
+                        "in": "query",
+                        "description": "ID vườn cà phê cần lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "predicted_disease_id",
+                        "in": "query",
+                        "description": "ID sâu bệnh được dự đoán/chẩn đoán",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "description": "Ngày bắt đầu lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-01"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "description": "Ngày kết thúc lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách yêu cầu chẩn đoán thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "422": {
+                        "description": "Dữ liệu lọc không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Diagnosis Requests"
+                ],
+                "summary": "Tạo yêu cầu chẩn đoán",
+                "description": "Farmer gửi hình ảnh và mô tả triệu chứng để yêu cầu chẩn đoán sâu bệnh trên cây cà phê.",
+                "operationId": "4dcb400f1eec42563688ed12af4ee5e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "coffee_farm_id",
+                                    "image_url",
+                                    "symptom_description"
+                                ],
+                                "properties": {
+                                    "coffee_farm_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "diagnosis-requests/la-ca-phe-bi-benh.jpg"
+                                    },
+                                    "symptom_description": {
+                                        "type": "string",
+                                        "example": "Lá cà phê xuất hiện các đốm vàng cam ở mặt dưới, cây có dấu hiệu rụng lá."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo yêu cầu chẩn đoán thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền tạo yêu cầu chẩn đoán"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê hoặc không có quyền truy cập"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/diagnosis-requests/{id}": {
+            "get": {
+                "tags": [
+                    "Diagnosis Requests"
+                ],
+                "summary": "Lấy chi tiết yêu cầu chẩn đoán",
+                "description": "Lấy chi tiết một yêu cầu chẩn đoán sâu bệnh theo ID.",
+                "operationId": "dcc7f2732868c686db14f3d36e591730",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID yêu cầu chẩn đoán",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết yêu cầu chẩn đoán thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy yêu cầu chẩn đoán"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Diagnosis Requests"
+                ],
+                "summary": "Cập nhật kết quả chẩn đoán",
+                "description": "Expert/Admin cập nhật kết quả chẩn đoán, bệnh dự đoán, độ tin cậy, ghi chú và khuyến nghị xử lý.",
+                "operationId": "6c585d3dfc2fbd38491eeb439ef3315f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID yêu cầu chẩn đoán",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "predicted_disease_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "confidence_score": {
+                                        "description": "Độ tin cậy của kết quả chẩn đoán, tính theo phần trăm",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 87.5
+                                    },
+                                    "diagnosis_note": {
+                                        "type": "string",
+                                        "example": "Triệu chứng phù hợp với bệnh gỉ sắt trên cây cà phê."
+                                    },
+                                    "recommendation": {
+                                        "type": "string",
+                                        "example": "Cần tỉa cành tạo thông thoáng, loại bỏ lá bệnh nặng và áp dụng biện pháp phòng trừ nấm theo khuyến cáo."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "diagnosed",
+                                        "enum": [
+                                            "pending",
+                                            "diagnosed",
+                                            "rejected"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật kết quả chẩn đoán thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền cập nhật yêu cầu chẩn đoán"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy yêu cầu chẩn đoán"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Diagnosis Requests"
+                ],
+                "summary": "Xóa yêu cầu chẩn đoán",
+                "description": "Farmer có thể xóa yêu cầu chẩn đoán của mình nếu còn ở trạng thái pending. Admin có thể xóa theo quyền quản trị.",
+                "operationId": "2dc860630d68694228ed2139b6f307c9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID yêu cầu chẩn đoán",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa yêu cầu chẩn đoán thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xóa yêu cầu chẩn đoán"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy yêu cầu chẩn đoán"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/diseases": {
+            "get": {
+                "tags": [
+                    "Diseases"
+                ],
+                "summary": "Lấy danh sách sâu bệnh",
+                "description": "Lấy danh sách bệnh hại, sâu hại hoặc tình trạng thiếu dinh dưỡng trên cây cà phê. Có thể lọc theo loại, mức độ nghiêm trọng, trạng thái và từ khóa.",
+                "operationId": "fa172a23d4f7cce02e2bd2bed8d1d5da",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Loại vấn đề trên cây cà phê",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "disease",
+                                "pest",
+                                "nutrient_deficiency",
+                                "other"
+                            ]
+                        },
+                        "example": "disease"
+                    },
+                    {
+                        "name": "severity",
+                        "in": "query",
+                        "description": "Mức độ nghiêm trọng",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "low",
+                                "medium",
+                                "high"
+                            ]
+                        },
+                        "example": "medium"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Trạng thái hiển thị",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive"
+                            ]
+                        },
+                        "example": "active"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm theo tên, triệu chứng, nguyên nhân hoặc cách xử lý",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "gỉ sắt"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách sâu bệnh thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "422": {
+                        "description": "Dữ liệu lọc không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Diseases"
+                ],
+                "summary": "Tạo sâu bệnh mới",
+                "description": "Admin tạo mới thông tin bệnh hại, sâu hại hoặc vấn đề thiếu dinh dưỡng trên cây cà phê.",
+                "operationId": "12f9441f31335031d58b243413c47384",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "type",
+                                    "symptoms"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Bệnh gỉ sắt trên cây cà phê"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "benh-gi-sat-tren-cay-ca-phe"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "disease",
+                                        "enum": [
+                                            "disease",
+                                            "pest",
+                                            "nutrient_deficiency",
+                                            "other"
+                                        ]
+                                    },
+                                    "symptoms": {
+                                        "type": "string",
+                                        "example": "Lá xuất hiện các đốm màu vàng cam, mặt dưới lá có lớp bột màu cam, lá rụng sớm."
+                                    },
+                                    "causes": {
+                                        "type": "string",
+                                        "example": "Do nấm gây bệnh phát triển mạnh trong điều kiện ẩm độ cao, vườn rậm rạp và thiếu thông thoáng."
+                                    },
+                                    "prevention": {
+                                        "type": "string",
+                                        "example": "Tỉa cành tạo thông thoáng, vệ sinh vườn, bón phân cân đối và theo dõi thường xuyên trong mùa mưa."
+                                    },
+                                    "treatment": {
+                                        "type": "string",
+                                        "example": "Loại bỏ lá bệnh nặng, sử dụng thuốc phòng trừ nấm phù hợp theo khuyến cáo kỹ thuật."
+                                    },
+                                    "severity": {
+                                        "type": "string",
+                                        "example": "medium",
+                                        "enum": [
+                                            "low",
+                                            "medium",
+                                            "high"
+                                        ]
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "diseases/benh-gi-sat-ca-phe.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo thông tin sâu bệnh thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được tạo sâu bệnh"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/diseases/{id}": {
+            "get": {
+                "tags": [
+                    "Diseases"
+                ],
+                "summary": "Lấy chi tiết sâu bệnh",
+                "description": "Lấy chi tiết thông tin một bệnh hại, sâu hại hoặc tình trạng thiếu dinh dưỡng theo ID.",
+                "operationId": "23d564c0e827afc30895fcda16a4581e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID sâu bệnh",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết sâu bệnh thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy thông tin sâu bệnh"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Diseases"
+                ],
+                "summary": "Cập nhật sâu bệnh",
+                "description": "Admin cập nhật thông tin bệnh hại, sâu hại hoặc tình trạng thiếu dinh dưỡng.",
+                "operationId": "83ee132fdaf230d73909385ffde9d43e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID sâu bệnh",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Cập nhật bệnh gỉ sắt trên cây cà phê"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "cap-nhat-benh-gi-sat-tren-cay-ca-phe"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "disease",
+                                        "enum": [
+                                            "disease",
+                                            "pest",
+                                            "nutrient_deficiency",
+                                            "other"
+                                        ]
+                                    },
+                                    "symptoms": {
+                                        "type": "string",
+                                        "example": "Lá có đốm vàng cam, mặt dưới lá có bột màu cam, cây sinh trưởng kém."
+                                    },
+                                    "causes": {
+                                        "type": "string",
+                                        "example": "Nấm bệnh phát triển trong điều kiện mưa nhiều, ẩm độ cao và vườn thiếu thông thoáng."
+                                    },
+                                    "prevention": {
+                                        "type": "string",
+                                        "example": "Tạo tán hợp lý, thu gom lá bệnh, quản lý dinh dưỡng và độ ẩm vườn."
+                                    },
+                                    "treatment": {
+                                        "type": "string",
+                                        "example": "Áp dụng biện pháp phòng trừ tổng hợp, dùng thuốc theo khuyến cáo của chuyên gia."
+                                    },
+                                    "severity": {
+                                        "type": "string",
+                                        "example": "high",
+                                        "enum": [
+                                            "low",
+                                            "medium",
+                                            "high"
+                                        ]
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "diseases/cap-nhat-gi-sat.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật thông tin sâu bệnh thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được cập nhật sâu bệnh"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy thông tin sâu bệnh"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Diseases"
+                ],
+                "summary": "Xóa sâu bệnh",
+                "description": "Admin xóa thông tin sâu bệnh khỏi hệ thống.",
+                "operationId": "63a41be42d75399d2721e845adfd715a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID sâu bệnh",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa thông tin sâu bệnh thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được xóa sâu bệnh"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy thông tin sâu bệnh"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/market-prices": {
+            "get": {
+                "tags": [
+                    "Market Prices"
+                ],
+                "summary": "Lấy danh sách giá cà phê thị trường",
+                "description": "Lấy danh sách giá cà phê thị trường. Có thể lọc theo phạm vi thị trường, tỉnh, loại cà phê, nguồn dữ liệu, trạng thái và khoảng ngày.",
+                "operationId": "db2e2a77772fa3bb82f9d0c74adf3a9b",
+                "parameters": [
+                    {
+                        "name": "market_scope",
+                        "in": "query",
+                        "description": "Phạm vi thị trường",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "domestic",
+                                "world"
+                            ]
+                        },
+                        "example": "domestic"
+                    },
+                    {
+                        "name": "province",
+                        "in": "query",
+                        "description": "Tỉnh/khu vực giá cà phê",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "Đắk Lắk"
+                    },
+                    {
+                        "name": "coffee_type",
+                        "in": "query",
+                        "description": "Loại cà phê",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "robusta",
+                                "arabica",
+                                "mixed",
+                                "other"
+                            ]
+                        },
+                        "example": "robusta"
+                    },
+                    {
+                        "name": "source_type",
+                        "in": "query",
+                        "description": "Loại nguồn dữ liệu",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "manual",
+                                "api",
+                                "sheet"
+                            ]
+                        },
+                        "example": "manual"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Trạng thái bản ghi giá",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive"
+                            ]
+                        },
+                        "example": "active"
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "description": "Ngày bắt đầu lọc giá",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-01"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "description": "Ngày kết thúc lọc giá",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách giá cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "422": {
+                        "description": "Dữ liệu lọc không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Market Prices"
+                ],
+                "summary": "Tạo giá cà phê thị trường",
+                "description": "Admin tạo mới bản ghi giá cà phê thị trường. Giai đoạn hiện tại ưu tiên nhập tay dữ liệu giá.",
+                "operationId": "1f8ac8213e115e8f1c28e3075fd6e39a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "market_scope",
+                                    "coffee_type",
+                                    "price",
+                                    "unit",
+                                    "price_date"
+                                ],
+                                "properties": {
+                                    "market_scope": {
+                                        "type": "string",
+                                        "example": "domestic",
+                                        "enum": [
+                                            "domestic",
+                                            "world"
+                                        ]
+                                    },
+                                    "province": {
+                                        "description": "Bắt buộc khi market_scope là domestic",
+                                        "type": "string",
+                                        "example": "Đắk Lắk",
+                                        "nullable": true
+                                    },
+                                    "coffee_type": {
+                                        "type": "string",
+                                        "example": "robusta",
+                                        "enum": [
+                                            "robusta",
+                                            "arabica",
+                                            "mixed",
+                                            "other"
+                                        ]
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 125000
+                                    },
+                                    "unit": {
+                                        "type": "string",
+                                        "example": "VND/kg"
+                                    },
+                                    "price_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-06-10"
+                                    },
+                                    "source": {
+                                        "type": "string",
+                                        "example": "Admin nhập tay",
+                                        "nullable": true
+                                    },
+                                    "source_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/gia-ca-phe",
+                                        "nullable": true
+                                    },
+                                    "source_type": {
+                                        "type": "string",
+                                        "example": "manual",
+                                        "enum": [
+                                            "manual",
+                                            "api",
+                                            "sheet"
+                                        ]
+                                    },
+                                    "fetched_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2026-06-10 08:00:00",
+                                        "nullable": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "example": "Giá tham khảo cho khu vực Tây Nguyên.",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo giá cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được tạo giá cà phê"
+                    },
+                    "409": {
+                        "description": "Giá cà phê cho ngày/khu vực/loại cà phê này đã tồn tại"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/market-prices/{id}": {
+            "get": {
+                "tags": [
+                    "Market Prices"
+                ],
+                "summary": "Lấy chi tiết giá cà phê",
+                "description": "Lấy chi tiết một bản ghi giá cà phê thị trường theo ID.",
+                "operationId": "e256ec4dbb71cef1c84bcf838e90824c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bản ghi giá cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết giá cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy giá cà phê"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Market Prices"
+                ],
+                "summary": "Cập nhật giá cà phê thị trường",
+                "description": "Admin cập nhật thông tin giá cà phê thị trường.",
+                "operationId": "276a10a7d9d9b87620637e4949ac2412",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bản ghi giá cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "market_scope": {
+                                        "type": "string",
+                                        "example": "domestic",
+                                        "enum": [
+                                            "domestic",
+                                            "world"
+                                        ]
+                                    },
+                                    "province": {
+                                        "type": "string",
+                                        "example": "Gia Lai",
+                                        "nullable": true
+                                    },
+                                    "coffee_type": {
+                                        "type": "string",
+                                        "example": "robusta",
+                                        "enum": [
+                                            "robusta",
+                                            "arabica",
+                                            "mixed",
+                                            "other"
+                                        ]
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 126500
+                                    },
+                                    "unit": {
+                                        "type": "string",
+                                        "example": "VND/kg"
+                                    },
+                                    "price_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2026-06-10"
+                                    },
+                                    "source": {
+                                        "type": "string",
+                                        "example": "Admin cập nhật",
+                                        "nullable": true
+                                    },
+                                    "source_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/gia-ca-phe-cap-nhat",
+                                        "nullable": true
+                                    },
+                                    "source_type": {
+                                        "type": "string",
+                                        "example": "manual",
+                                        "enum": [
+                                            "manual",
+                                            "api",
+                                            "sheet"
+                                        ]
+                                    },
+                                    "fetched_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2026-06-10 09:00:00",
+                                        "nullable": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "example": "Cập nhật giá theo thị trường trong ngày.",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active",
+                                        "enum": [
+                                            "active",
+                                            "inactive"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật giá cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được cập nhật giá cà phê"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy giá cà phê"
+                    },
+                    "409": {
+                        "description": "Giá cà phê cho ngày/khu vực/loại cà phê này đã tồn tại"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Market Prices"
+                ],
+                "summary": "Xóa giá cà phê thị trường",
+                "description": "Admin xóa một bản ghi giá cà phê thị trường khỏi hệ thống.",
+                "operationId": "4fa2bb2a3316b5ea3180711960545cbd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bản ghi giá cà phê",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa giá cà phê thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được xóa giá cà phê"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy giá cà phê"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/questions": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Lấy danh sách câu hỏi kỹ thuật",
+                "description": "Farmer xem danh sách câu hỏi của mình. Expert/Admin có thể xem danh sách câu hỏi để trả lời hoặc quản lý.",
+                "operationId": "62a64e20f4dfa61238f24809b1ff4ac7",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Lọc theo trạng thái câu hỏi",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "pending",
+                                "answered",
+                                "closed"
+                            ]
+                        },
+                        "example": "pending"
+                    },
+                    {
+                        "name": "coffee_farm_id",
+                        "in": "query",
+                        "description": "ID vườn cà phê liên quan đến câu hỏi",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm theo tiêu đề hoặc nội dung câu hỏi",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "lá cà phê bị vàng"
+                    },
+                    {
+                        "name": "from_date",
+                        "in": "query",
+                        "description": "Ngày bắt đầu lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-01"
+                    },
+                    {
+                        "name": "to_date",
+                        "in": "query",
+                        "description": "Ngày kết thúc lọc",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        },
+                        "example": "2026-06-10"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách câu hỏi kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "422": {
+                        "description": "Dữ liệu lọc không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Tạo câu hỏi kỹ thuật",
+                "description": "Farmer tạo câu hỏi kỹ thuật để được chuyên gia hoặc quản trị viên hỗ trợ.",
+                "operationId": "d4e88aa23687fcfc6a359c5a78e43e6c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "coffee_farm_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Lá cà phê bị vàng sau nhiều ngày mưa"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Vườn cà phê của tôi bị vàng lá, một số cây có hiện tượng rụng lá sau nhiều ngày mưa. Tôi nên xử lý như thế nào?"
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "questions/la-ca-phe-bi-vang.jpg",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo câu hỏi kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền tạo câu hỏi kỹ thuật"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê hoặc không có quyền truy cập"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/questions/{id}": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Lấy chi tiết câu hỏi kỹ thuật",
+                "description": "Lấy chi tiết một câu hỏi kỹ thuật theo ID, có thể bao gồm thông tin người hỏi, vườn cà phê và danh sách câu trả lời.",
+                "operationId": "3e607625b835019632450d04db98c9d4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID câu hỏi kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết câu hỏi kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu hỏi kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Cập nhật câu hỏi kỹ thuật",
+                "description": "Farmer có thể cập nhật câu hỏi của mình khi câu hỏi còn ở trạng thái pending. Expert/Admin có thể cập nhật trạng thái theo nghiệp vụ.",
+                "operationId": "0c5ad801a6185a937931a9d0ede2a378",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID câu hỏi kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "coffee_farm_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Cập nhật câu hỏi về lá cà phê bị vàng"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Tôi bổ sung thêm ảnh và mô tả hiện tượng vàng lá sau mưa."
+                                    },
+                                    "image_url": {
+                                        "type": "string",
+                                        "example": "questions/cap-nhat-la-ca-phe-bi-vang.jpg",
+                                        "nullable": true
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "pending",
+                                        "enum": [
+                                            "pending",
+                                            "answered",
+                                            "closed"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật câu hỏi kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền cập nhật câu hỏi kỹ thuật"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu hỏi kỹ thuật"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Xóa câu hỏi kỹ thuật",
+                "description": "Farmer có thể xóa câu hỏi của mình khi còn ở trạng thái pending. Admin có thể xóa theo quyền quản trị.",
+                "operationId": "db58151d9ca996463721e7feafaa9fa0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID câu hỏi kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa câu hỏi kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xóa câu hỏi kỹ thuật"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy câu hỏi kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/technical-articles": {
+            "get": {
+                "tags": [
+                    "Technical Articles"
+                ],
+                "summary": "Lấy danh sách bài viết kỹ thuật",
+                "description": "Lấy danh sách bài viết kỹ thuật. Có thể lọc theo danh mục, trạng thái, nguồn, xác thực và từ khóa.",
+                "operationId": "5727fe7aa1e0c7c1d94e080f9fb89685",
+                "parameters": [
+                    {
+                        "name": "technical_category_id",
+                        "in": "query",
+                        "description": "ID danh mục kỹ thuật",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Trạng thái bài viết",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "draft",
+                                "published",
+                                "hidden"
+                            ]
+                        },
+                        "example": "published"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm theo tiêu đề, tóm tắt hoặc nội dung",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bón phân"
+                    },
+                    {
+                        "name": "source_type",
+                        "in": "query",
+                        "description": "Loại nguồn bài viết",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "self_written",
+                                "external",
+                                "summarized",
+                                "expert_contributed"
+                            ]
+                        },
+                        "example": "external"
+                    },
+                    {
+                        "name": "is_verified",
+                        "in": "query",
+                        "description": "Trạng thái xác thực nội dung",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "example": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách bài viết kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "422": {
+                        "description": "Dữ liệu lọc không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Technical Articles"
+                ],
+                "summary": "Tạo bài viết kỹ thuật",
+                "description": "Admin tạo bài viết kỹ thuật. Bài viết có thể là bản nháp, đã xuất bản hoặc ẩn.",
+                "operationId": "1d680883274505c20843d5ed38aa4006",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "technical_category_id",
+                                    "title",
+                                    "content"
+                                ],
+                                "properties": {
+                                    "technical_category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Kỹ thuật bón phân cho cà phê giai đoạn kinh doanh"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "ky-thuat-bon-phan-cho-ca-phe-giai-doan-kinh-doanh"
+                                    },
+                                    "summary": {
+                                        "type": "string",
+                                        "example": "Hướng dẫn bón phân cân đối cho cây cà phê nhằm tăng năng suất và hạn chế sâu bệnh."
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Nội dung chi tiết bài viết kỹ thuật..."
+                                    },
+                                    "thumbnail_url": {
+                                        "type": "string",
+                                        "example": "articles/bon-phan-ca-phe.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "published",
+                                        "enum": [
+                                            "draft",
+                                            "published",
+                                            "hidden"
+                                        ]
+                                    },
+                                    "published_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2026-06-10 09:00:00"
+                                    },
+                                    "source_type": {
+                                        "type": "string",
+                                        "example": "external",
+                                        "enum": [
+                                            "self_written",
+                                            "external",
+                                            "summarized",
+                                            "expert_contributed"
+                                        ]
+                                    },
+                                    "source_name": {
+                                        "type": "string",
+                                        "example": "Tài liệu kỹ thuật nông nghiệp"
+                                    },
+                                    "source_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/tai-lieu-ca-phe"
+                                    },
+                                    "is_verified": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo bài viết kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được tạo bài viết"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/technical-articles/{id}": {
+            "get": {
+                "tags": [
+                    "Technical Articles"
+                ],
+                "summary": "Lấy chi tiết bài viết kỹ thuật",
+                "description": "Lấy chi tiết bài viết kỹ thuật theo ID. Hệ thống có thể tăng view_count khi xem chi tiết.",
+                "operationId": "e8eff9b3cbb941b74ffedf0a83bb0612",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bài viết kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết bài viết kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy bài viết kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Technical Articles"
+                ],
+                "summary": "Cập nhật bài viết kỹ thuật",
+                "description": "Admin cập nhật bài viết kỹ thuật, trạng thái xuất bản và thông tin xác thực nguồn.",
+                "operationId": "3280c427500041fd1dafbb2cd1c66789",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bài viết kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "technical_category_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Cập nhật kỹ thuật bón phân cho cà phê"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "cap-nhat-ky-thuat-bon-phan-cho-ca-phe"
+                                    },
+                                    "summary": {
+                                        "type": "string",
+                                        "example": "Tóm tắt bài viết đã cập nhật."
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Nội dung cập nhật..."
+                                    },
+                                    "thumbnail_url": {
+                                        "type": "string",
+                                        "example": "articles/cap-nhat-bon-phan.jpg"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "published",
+                                        "enum": [
+                                            "draft",
+                                            "published",
+                                            "hidden"
+                                        ]
+                                    },
+                                    "published_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2026-06-10 10:00:00"
+                                    },
+                                    "source_type": {
+                                        "type": "string",
+                                        "example": "summarized",
+                                        "enum": [
+                                            "self_written",
+                                            "external",
+                                            "summarized",
+                                            "expert_contributed"
+                                        ]
+                                    },
+                                    "source_name": {
+                                        "type": "string",
+                                        "example": "Nguồn tổng hợp kỹ thuật cà phê"
+                                    },
+                                    "source_url": {
+                                        "type": "string",
+                                        "example": "https://example.com/source"
+                                    },
+                                    "is_verified": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật bài viết kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được cập nhật bài viết"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy bài viết kỹ thuật"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Technical Articles"
+                ],
+                "summary": "Xóa bài viết kỹ thuật",
+                "description": "Admin xóa bài viết kỹ thuật khỏi hệ thống.",
+                "operationId": "4b1ce9d57b37a93015797aa2f9c28d82",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID bài viết kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa bài viết kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được xóa bài viết"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy bài viết kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/technical-categories": {
+            "get": {
+                "tags": [
+                    "Technical Categories"
+                ],
+                "summary": "Lấy danh sách danh mục kỹ thuật",
+                "description": "Lấy danh sách danh mục bài viết kỹ thuật. Farmer/Expert/Admin đều có thể xem.",
+                "operationId": "92be413cda662a78881acadc2538f334",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Lọc theo trạng thái danh mục",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "active"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Từ khóa tìm kiếm theo tên danh mục",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "bón phân"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy danh sách danh mục kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Technical Categories"
+                ],
+                "summary": "Tạo danh mục kỹ thuật",
+                "description": "Admin tạo mới danh mục kỹ thuật.",
+                "operationId": "64ce320061945f5491e433c586caeb9a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Kỹ thuật bón phân"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "ky-thuat-bon-phan"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Các bài viết hướng dẫn kỹ thuật bón phân cho cây cà phê."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Tạo danh mục kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được tạo danh mục"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/technical-categories/{id}": {
+            "get": {
+                "tags": [
+                    "Technical Categories"
+                ],
+                "summary": "Lấy chi tiết danh mục kỹ thuật",
+                "description": "Lấy thông tin chi tiết một danh mục kỹ thuật theo ID.",
+                "operationId": "2bc69c8ed01b295f14b28200879f532d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID danh mục kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy chi tiết danh mục kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy danh mục kỹ thuật"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Technical Categories"
+                ],
+                "summary": "Cập nhật danh mục kỹ thuật",
+                "description": "Admin cập nhật thông tin danh mục kỹ thuật.",
+                "operationId": "93d2fc8a67fa6b6e72949a2ec0165ded",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID danh mục kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Kỹ thuật chăm sóc cà phê"
+                                    },
+                                    "slug": {
+                                        "type": "string",
+                                        "example": "ky-thuat-cham-soc-ca-phe"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Cập nhật mô tả danh mục."
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "active"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật danh mục kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được cập nhật danh mục"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy danh mục kỹ thuật"
+                    },
+                    "422": {
+                        "description": "Dữ liệu không hợp lệ"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Technical Categories"
+                ],
+                "summary": "Xóa danh mục kỹ thuật",
+                "description": "Admin xóa danh mục kỹ thuật. Nếu danh mục đã có bài viết, hệ thống có thể không cho xóa.",
+                "operationId": "6cb74782adc43e2db6acb441ed0ad0d4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID danh mục kỹ thuật",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Xóa danh mục kỹ thuật thành công"
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Chỉ quản trị viên mới được xóa danh mục"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy danh mục kỹ thuật"
+                    },
+                    "409": {
+                        "description": "Không thể xóa vì danh mục đã có bài viết"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/weather/farms/{farm_id}": {
+            "get": {
+                "tags": [
+                    "Weather"
+                ],
+                "summary": "Lấy dữ liệu thời tiết theo vườn cà phê",
+                "description": "Lấy thông tin thời tiết hiện tại và dự báo theo vườn cà phê dựa trên latitude/longitude. Hệ thống ưu tiên trả dữ liệu cache trong bảng weather_data nếu đã có dữ liệu trong ngày, nếu chưa có sẽ gọi Open-Meteo API và lưu cache.",
+                "operationId": "f82b528f6c36434001de49650af94f11",
+                "parameters": [
+                    {
+                        "name": "farm_id",
+                        "in": "path",
+                        "description": "ID vườn cà phê cần lấy dữ liệu thời tiết",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thời tiết thành công",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Lấy dữ liệu thời tiết thành công."
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "farm": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "farm_name": {
+                                                            "type": "string",
+                                                            "example": "Vườn cà phê Ea Tul"
+                                                        },
+                                                        "province": {
+                                                            "type": "string",
+                                                            "example": "Đắk Lắk"
+                                                        },
+                                                        "district": {
+                                                            "type": "string",
+                                                            "example": "Cư Mgar"
+                                                        },
+                                                        "latitude": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 12.6667
+                                                        },
+                                                        "longitude": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 108.05
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "source": {
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Open-Meteo"
+                                                        },
+                                                        "timezone": {
+                                                            "type": "string",
+                                                            "example": "Asia/Bangkok"
+                                                        },
+                                                        "is_cached": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "fetched_at": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2026-06-10 08:00:00"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "current": {
+                                                    "properties": {
+                                                        "temperature": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 26.7
+                                                        },
+                                                        "humidity": {
+                                                            "type": "integer",
+                                                            "example": 78
+                                                        },
+                                                        "precipitation": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        },
+                                                        "wind_speed": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 4.9
+                                                        },
+                                                        "weather_code": {
+                                                            "type": "integer",
+                                                            "example": 3
+                                                        },
+                                                        "weather_text": {
+                                                            "type": "string",
+                                                            "example": "Nhiều mây"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "daily_forecast": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "date": {
+                                                                "type": "string",
+                                                                "format": "date",
+                                                                "example": "2026-06-10"
+                                                            },
+                                                            "temperature_min": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 22.4
+                                                            },
+                                                            "temperature_max": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 30.1
+                                                            },
+                                                            "precipitation_sum": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 3.5
+                                                            },
+                                                            "precipitation_probability_max": {
+                                                                "type": "integer",
+                                                                "example": 65
+                                                            },
+                                                            "wind_speed_max": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 12.5
+                                                            },
+                                                            "weather_code": {
+                                                                "type": "integer",
+                                                                "example": 61
+                                                            },
+                                                            "weather_text": {
+                                                                "type": "string",
+                                                                "example": "Mưa nhẹ"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "hourly_forecast": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "time": {
+                                                                "type": "string",
+                                                                "example": "2026-06-10 09:00"
+                                                            },
+                                                            "temperature": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 27.2
+                                                            },
+                                                            "humidity": {
+                                                                "type": "integer",
+                                                                "example": 76
+                                                            },
+                                                            "precipitation_probability": {
+                                                                "type": "integer",
+                                                                "example": 40
+                                                            },
+                                                            "precipitation": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 0.2
+                                                            },
+                                                            "wind_speed": {
+                                                                "type": "number",
+                                                                "format": "float",
+                                                                "example": 5.1
+                                                            },
+                                                            "weather_code": {
+                                                                "type": "integer",
+                                                                "example": 3
+                                                            },
+                                                            "weather_text": {
+                                                                "type": "string",
+                                                                "example": "Nhiều mây"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "warnings": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "example": [
+                                                        "Khả năng mưa cao, cần chú ý thoát nước cho vườn cà phê."
+                                                    ]
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Chưa đăng nhập hoặc token không hợp lệ"
+                    },
+                    "403": {
+                        "description": "Không có quyền xem dữ liệu thời tiết của vườn này"
+                    },
+                    "404": {
+                        "description": "Không tìm thấy vườn cà phê"
+                    },
+                    "422": {
+                        "description": "Vườn cà phê chưa có latitude/longitude"
+                    },
+                    "500": {
+                        "description": "Không thể lấy dữ liệu thời tiết từ nguồn bên ngoài"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Nhập token theo dạng: Bearer {token}",
+                "bearerFormat": "Sanctum Token",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Admin Dashboard",
+            "description": "Admin Dashboard"
+        },
+        {
+            "name": "Answers",
+            "description": "Answers"
+        },
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Coffee Farms",
+            "description": "Coffee Farms"
+        },
+        {
+            "name": "Cultivation Logs",
+            "description": "Cultivation Logs"
+        },
+        {
+            "name": "Diagnosis Requests",
+            "description": "Diagnosis Requests"
+        },
+        {
+            "name": "Diseases",
+            "description": "Diseases"
+        },
+        {
+            "name": "Market Prices",
+            "description": "Market Prices"
+        },
+        {
+            "name": "Questions",
+            "description": "Questions"
+        },
+        {
+            "name": "Technical Articles",
+            "description": "Technical Articles"
+        },
+        {
+            "name": "Technical Categories",
+            "description": "Technical Categories"
+        },
+        {
+            "name": "Weather",
+            "description": "Weather"
+        }
+    ]
+}
