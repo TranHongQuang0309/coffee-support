@@ -65,6 +65,11 @@ class User extends Authenticatable
         return $this->hasMany(TechnicalArticle::class, 'created_by');
     }
 
+    public function verifiedTechnicalArticles()
+    {
+    return $this->hasMany(TechnicalArticle::class, 'verified_by');
+    }
+
     public function diseases()
     {
         return $this->hasMany(Disease::class, 'created_by');
